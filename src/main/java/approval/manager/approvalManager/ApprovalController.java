@@ -5,24 +5,25 @@
 package approval.manager.approvalManager;
 
 import java.util.List;
-import org.springframework.stereotype.Controller;
 import Model.Approval;
-import Model.ApprovalRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 /**
  *
  * @author aurian
  */
-@Controller
+@RestController
 @RequestMapping("/")
 public class ApprovalController {
     
+    //@Autowired
     private final ApprovalRepository repository;
     
-    ApprovalController(ApprovalRepository repo)
+    public ApprovalController(ApprovalRepository repository)
     {
-        this.repository = repo;
+        this.repository = repository;
     }
     
     

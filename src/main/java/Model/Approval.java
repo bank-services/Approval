@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,27 +17,26 @@ import lombok.Data;
  * @author aurian
  */
 @Entity
-@Data
 public class Approval {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
-@Column(name="account_id")
-    private int account_id;
-@Column(name="balance")
-    private int balance;
+    private Long id;
+@Column(name="account")
+    private int account;
+@Column(name="amount")
+    private int amount;
     
     public Approval()
     {
-        id = 000;
-        account_id = 000;
-        balance = 0;
+        id = 000L;
+        account = 000;
+        amount = 0;
     }
     
-    public Approval(int id,int account,int balance)
+    public Approval(Long id,int account,int balance)
     {
         this.id = id;
-        this.account_id = account;
-        this.balance=balance;
+        this.account = account;
+        this.amount=balance;
     }
 }
