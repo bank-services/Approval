@@ -20,11 +20,11 @@ import jakarta.persistence.Id;
 public class Approval {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
+    public Long id;
 @Column(name="account")
-    private int account;
+    public int account;
 @Column(name="amount")
-    private int amount;
+    public int amount;
     
     public Approval()
     {
