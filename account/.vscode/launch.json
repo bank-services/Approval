@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AccManagerApplication<accManager>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "iut.accountManager.accManager.AccManagerApplication",
+            "projectName": "accManager",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
