@@ -6,6 +6,7 @@ package approval.manager.approvalManager;
 
 import java.util.List;
 import Model.Approval;
+import Model.ApprovalException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,14 +53,14 @@ public class ApprovalController {
     
     @RequestMapping(value="/approvals/approval/{id}",method= RequestMethod.DELETE)
     public @ResponseBody Approval deleteApproval(@PathVariable int id){
-        Approval out = null;
         for(Approval app : repository.findAll()){
             if(app.getId() == id){
-                out = app;
+                Approval tmp = app;
                 repository.delete(app);
+                return tmp;
             }
         }
-        return out;
+        throw new ApprovalException("Wrong approval ID : "+id);
     }
     
     
@@ -71,6 +72,6 @@ public class ApprovalController {
                return app.getApproval();
            }
        }
-       return null;
+       throw new ApprovalException("Wrong approval ID : "+id);
     }
 }
