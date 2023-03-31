@@ -1,3 +1,4 @@
 approval/manager/approvalManager/ApprovalController.class
+approval/manager/approvalManager/ApprovalRepository.class
 Model/Approval.class
 approval/manager/approvalManager/ApprovalManagerApplication.class

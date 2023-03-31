@@ -20,23 +20,27 @@ import jakarta.persistence.Id;
 public class Approval {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    public Long id;
-@Column(name="account")
-    public int account;
-@Column(name="amount")
-    public int amount;
+    private Long id;
+    @Column(name="approved")
+    private String approved;
     
     public Approval()
     {
         id = 000L;
-        account = 000;
-        amount = 0;
+        approved="unApproved";
     }
     
-    public Approval(Long id,int account,int balance)
+    public Approval(Long id,String approved)
     {
         this.id = id;
-        this.account = account;
-        this.amount=balance;
+        this.approved = approved;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getApproval() {
+        return this.approved;
     }
 }
