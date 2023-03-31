@@ -6,8 +6,11 @@ package approval.manager.approvalManager;
 
 import java.util.List;
 import Model.Approval;
-import java.util.Optional;
+import Model.ApprovalException;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,22 +41,37 @@ public class ApprovalController {
     
     /**
      *
-     * @param id
-     * @param account
-     * @param amount
+     * @param app
      * @return
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST,produces = "application/json")
-    public @ResponseBody Approval putApproval(@PathVariable Long id,@RequestParam int account,@RequestParam int amount )
+    @RequestMapping(value = "/post", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Approval putApproval(@RequestBody Approval app)
     {
-        Approval ap = new Approval(id,account,amount);
-        this.repository.save(ap);
-        return ap;
+        this.repository.save(app);
+        return app;
     }
     
-    @RequestMapping(value = "/approvals/approval/{id}", method = RequestMethod.GET,produces = "application/json")
-    public @ResponseBody Approval getApproval(@PathVariable Long id)
+    @RequestMapping(value="/approvals/approval/{id}",method= RequestMethod.DELETE)
+    public @ResponseBody Approval deleteApproval(@PathVariable int id){
+        for(Approval app : repository.findAll()){
+            if(app.getId() == id){
+                Approval tmp = app;
+                repository.delete(app);
+                return tmp;
+            }
+        }
+        throw new ApprovalException("Wrong approval ID : "+id);
+    }
+    
+    
+    @RequestMapping(value = "/approvals/approval/{id}", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String getApproval(@PathVariable Long id)
     {
-        return this.repository.findById(id).orElse(Approval(0,0,0));
+        for(Approval app : repository.findAll()) {
+           if(app.getId().equals(id)){
+               return app.getApproval();
+           }
+       }
+       throw new ApprovalException("Wrong approval ID : "+id);
     }
 }
